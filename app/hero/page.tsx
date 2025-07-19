@@ -54,7 +54,7 @@ const Hero = () => {
             </h3>
           </div>
         </div>
-        <Arrow label="Experiences" />
+        <Arrow label="Experience" />
       </div>
     </div>
   );

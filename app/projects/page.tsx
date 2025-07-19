@@ -1,5 +1,6 @@
 import React from "react";
 import { ProjectShowcase } from "@/components/project-showcase";
+import ArrowDown from "@/components/arrow-down";
 
 // Realistic project data with YouTube video support
 const projects = [
@@ -41,9 +42,12 @@ const projects = [
 
 const Projects = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen">
+    <div className="flex flex-col items-center justify-center w-full h-screen relative">
       <div className="w-full">
         <ProjectShowcase projects={projects} autoplay={false} />
+      </div>
+      <div className="flex justify-center absolute bottom-4 left-0 w-full">
+        <ArrowDown label="More About Me" target="more" />
       </div>
     </div>
   );
