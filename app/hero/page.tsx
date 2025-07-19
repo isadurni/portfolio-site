@@ -2,6 +2,7 @@ import React from "react";
 import Socials from "@/components/socials";
 import Arrow from "@/components/arrow-down";
 import { TypingText } from "@/animations/typing";
+import Threads from "@/components/threads";
 
 const Hero = () => {
   return (
@@ -24,6 +25,15 @@ const Hero = () => {
             cursorClassName="bg-gray-600 dark:bg-gray-300"
           />
         </h2>
+      </div>
+      <div className="flex w-full h-full flex-col items-start">
+        <div className="w-full h-full">
+          <Threads
+            amplitude={3}
+            distance={0}
+            enableMouseInteraction={false}
+          />
+        </div>
       </div>
       {/* Bottom: University and Location */}
       <div className="flex flex-col items-center mb-4 mt-auto">
