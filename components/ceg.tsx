@@ -3,10 +3,9 @@ import Image from 'next/image';
 import cegsoft from '@/public/cegsoft.png';
 
 const cegBullets = [
-  "Developed and maintained web applications using modern technologies.",
-  "Collaborated with development team to implement new features and improvements.",
-  "Participated in code reviews and contributed to team best practices.",
-  "Worked on both frontend and backend development tasks.",
+  "Worked in a cross-functional agile team to build an internal tool for managing Expert Tax user accounts and licenses.",
+  "Developed UI/UX in the front-end using TypeScript and React, and built RESTful API endpoints with C# and .NET 8.",
+  "Deployed a solution that increased the efficiency of 5 members of the support team, on average by 2+ hours daily.",
 ];
 
 const CegsoftExperience = ({ onClose }: { onClose?: () => void }) => {
@@ -50,21 +49,22 @@ const CegsoftExperience = ({ onClose }: { onClose?: () => void }) => {
                 />
               </div>
               <h3 className="text-md font-semibold text-foreground mt-2">
-                Software Developer Internship
+                Software Developer Intern
               </h3>
+              <span className="text-sm text-muted-foreground mt-0 whitespace-nowrap">
+                June 2024 - July 2024
+              </span>
+              <span className="text-sm text-muted-foreground mt-0 whitespace-nowrap">
+                Guaynabo, PR
+              </span>
+              <ul className="list-disc list-inside text-sm text-muted-foreground mt-5 pl-2 space-y-2">
+                {cegBullets.map((point, idx) => (
+                  <li key={idx}>{point}</li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className="flex-shrink-0 ml-4 flex flex-col items-end">
-            <span className="text-sm text-muted-foreground mt-0 whitespace-nowrap">
-              June - July 2024
-            </span>
-          </div>
         </div>
-        <ul className="list-disc list-inside text-sm text-muted-foreground mt-2 pl-2">
-          {cegBullets.map((point, idx) => (
-            <li key={idx}>{point}</li>
-          ))}
-        </ul>
       </div>
     </div>
   );

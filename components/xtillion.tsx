@@ -8,7 +8,7 @@ const xtillionBullets = [
   "Developed a Next.js frontend using React and Typescript. Deployed the Dockerized UI and API to AWS for production use.",
   "Conducted research for a B2B client serving Fortune 500 companies, analyzing system architecture and integration needs.",
   "Built a Python ETL tool that converts ~10,000 lines of CSV and JSON parameters into a compliant text format for submission.",
-  "Ensured accuracy with 20+ unit tests, validating output integrity against conditional rules based on 300+ pages of specification.",
+  "Ensured accuracy with 20+ unit tests, validating output integrity against conditional rules based on 300+ pages of documents.",
 ];
 
 const XtillionExperience = ({ onClose }: { onClose?: () => void }) => {
@@ -54,37 +54,35 @@ const XtillionExperience = ({ onClose }: { onClose?: () => void }) => {
               <h3 className="text-md font-semibold text-foreground mt-2">
                 Software Engineering Intern
               </h3>
+              <span className="text-sm text-muted-foreground mt-0 whitespace-nowrap">
+                June 2025 - August 2025
+              </span>
               <p className="text-sm text-muted-foreground">
                 San Juan, PR
               </p>
+              {/* Bullets moved up after location */}
+              <div className="space-y-4 mt-5">
+                <div>
+                  <h4 className="text-sm font-semibold text-foreground mb-2">Internal Project:</h4>
+                  <ul className="list-disc list-inside text-sm text-muted-foreground pl-2 space-y-1">
+                    {xtillionBullets.slice(0, 3).map((point, idx) => (
+                      <li key={idx}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-foreground mb-2">Client Project:</h4>
+                  <ul className="list-disc list-inside text-sm text-muted-foreground pl-2 space-y-1">
+                    {xtillionBullets.slice(3).map((point, idx) => (
+                      <li key={idx}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex-shrink-0 ml-4 flex flex-col items-end">
-            <span className="text-sm text-muted-foreground mt-0 whitespace-nowrap">
-              June 2025 - August 2025
-            </span>
           </div>
         </div>
         
-        <div className="space-y-4">
-          <div>
-            <h4 className="text-sm font-semibold text-foreground mb-2">Internal Project:</h4>
-            <ul className="list-disc list-inside text-sm text-muted-foreground pl-2 space-y-1">
-              {xtillionBullets.slice(0, 3).map((point, idx) => (
-                <li key={idx}>{point}</li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-sm font-semibold text-foreground mb-2">Client Project:</h4>
-            <ul className="list-disc list-inside text-sm text-muted-foreground pl-2 space-y-1">
-              {xtillionBullets.slice(3).map((point, idx) => (
-                <li key={idx}>{point}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
   );

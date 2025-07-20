@@ -11,7 +11,7 @@ const education = [
   {
     school: "University of Notre Dame",
     degree: "B.S. in Computer Science",
-    years: "2022 – 2026",
+    years: "2026",
     details: [
       "Minor in Engineering Corporate Practice",
       "London Program, Spring 2025",
@@ -20,7 +20,7 @@ const education = [
   {
     school: "The Baldwin School of Puerto Rico",
     degree: "International Baccalaureate (IB) Diploma",
-    years: "2018 – 2022",
+    years: "2022",
     details: [],
   },
 ];
@@ -116,7 +116,7 @@ const About = () => {
                   maxHeight: "100%",
                 }}
               >
-                <section className="w-full p-2">
+                <section className="w-full p-1">
                   <h1 className="text-xl font-bold mb-1">Intro</h1>
                   <p className="text-base text-muted-foreground">
                     Hi I'm <span className="font-semibold">Ignacio!</span>
