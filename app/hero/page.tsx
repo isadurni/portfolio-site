@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
 import Arrow from "@/components/arrow-down";
 import { TypingText } from "@/animations/typing";
 import Threads from "@/components/threads";
@@ -6,21 +8,57 @@ import LinkedIn from "@/components/linkedin";
 import Github from "@/components/github";
 
 const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [key, setKey] = useState(0); // Key to force re-render of TypingText
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setKey(prev => prev + 1); // Increment key to force re-render
+        } else {
+          setIsVisible(false);
+        }
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: "0px 0px -100px 0px" // Trigger slightly before the section is fully in view
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="h-screen w-full flex flex-col">
+    <div ref={sectionRef} className="h-screen w-full flex flex-col">
       {/* Top: Name and subtitle */}
       <div className="flex flex-col items-center justify-center mt-25 mb-8">
-        <h1 className="text-5xl font-bold mb-2">Ignacio Sadurní</h1>
+        <h1 className="text-5xl font-bold mb-2">
+          Ignacio Sadurní
+        </h1>
         <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium">
-          <TypingText
-            text={[
-              "Software Engineer",
-            ]}
-            duration={150}
-            cursor
-            className="inline"
-            cursorClassName="bg-gray-600 dark:bg-gray-300"
-          />
+          {isVisible && (
+            <TypingText
+              key={key} // Force re-render with new key
+              text={[
+                "Software Engineer",
+              ]}
+              duration={100}
+              cursor
+              className="inline"
+              cursorClassName="bg-gray-600 dark:bg-gray-300"
+            />
+          )}
         </h2>
       </div>
       <div className="flex w-full h-full flex-col items-start">
@@ -54,7 +92,7 @@ const Hero = () => {
             </h3>
           </div>
         </div>
-        <Arrow label="Experience" />
+        <Arrow label="Bio" />
       </div>
     </div>
   );
