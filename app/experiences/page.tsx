@@ -1,172 +1,190 @@
-import React, { useState } from "react";
-import ScrollStack, { ScrollStackItem } from '@/components/scroll-stack';
-import Image from 'next/image';
-import xtillion from '@/public/xtillion.png';
-import cegsoft from '@/public/cegsoft.png';
-import ArrowDown from "@/components/arrow-down";
-import ArrowUp from "@/components/arrow-up";
-import { motion } from "motion/react";
+"use client";
 
-// Card data for easier mapping
-const cards = [
+import React, { useState, useRef, useEffect } from "react";
+import Experiences from "@/components/experiences";
+import ArrowDown from "@/components/arrow-down";
+import XtillionExperience from "@/components/xtillion";
+import CegsoftExperience from "@/components/ceg";
+import { TypingText } from "@/animations/typing";
+
+const education = [
   {
-    key: "xtillion",
-    logo: xtillion,
-    logoAlt: "Xtillion Logo",
-    title: "Software Engineering Internship",
-    date: "June - August 2025",
-    bulletPoints: [
-      "Built an end-to-end agentic AI evaluation framework to benchmark LLM performance across specific business use cases.",
-      "Engineered a FastAPI backend in Python with RESTful endpoints, Pydantic validations, and SQLAlchemy CRUD operations.",
-      "Developed a Next.js frontend using React and Typescript. Deployed the Dockerized UI and API to AWS for production use.",
-      "Conducted research for a B2B client serving Fortune 500 companies, analyzing system architecture and integration needs.",
-      "Built a Python ETL tool that converts ~10,000 lines of CSV and JSON parameters into a compliant text format for submission.",
-      "Ensured accuracy with 20+ unit tests, validating output integrity against conditional rules based on 300+ pages of specification."
+    school: "University of Notre Dame",
+    degree: "B.S. in Computer Science",
+    years: "2026",
+    details: [
+      "Minor in Engineering Corporate Practice",
+      "London Program, Spring 2025",
     ],
-    logoWidth: 140, // Make Xtillion logo bigger
-    logoHeight: 140,
   },
   {
-    key: "cegsoft",
-    logo: cegsoft,
-    logoAlt: "Cegsoft Logo",
-    title: "Software Developer Internship",
-    date: "June - July 2024",
-    bulletPoints: [
-      "Worked in a cross-functional agile team to build an internal tool for managing Expert Tax user accounts and licenses.",
-      "Developed UI/UX in the front-end using TypeScript and React, and built RESTful API endpoints with C# and .NET 8.",
-      "Deployed a solution that increased the efficiency of 5 members of the support team, on average by 2+ hours daily."
-    ],
-    logoWidth: 120,
-    logoHeight: 100,
+    school: "The Baldwin School of Puerto Rico",
+    degree: "International Baccalaureate (IB) Diploma",
+    years: "2022",
+    details: [],
   },
 ];
 
-// Helper to force remount of bullet list for animation reset
-const BulletList = ({ points, animateKey, isActive }: { points: string[], animateKey: string, isActive: boolean }) => {
-  return (
-    <ul className="mb-2 ml-5 list-disc">
-      {points.map((point, pointIndex) => (
-        <motion.li
-          key={animateKey + '-' + pointIndex}
-          initial={{ opacity: 0, y: -10 }}
-          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-          transition={{ delay: isActive ? 0.15 * (pointIndex + 1) : 0 }}
-          className="flex items-center text-sm text-gray-700 dark:text-gray-200 mb-2"
-        >
-          <span className="w-1.5 h-1.5 bg-gray-700 rounded-full mr-3"></span>
-          {point}
-        </motion.li>
-      ))}
-    </ul>
-  );
-};
+const aboutCardBaseClass =
+  "bg-gray-100/50 dark:bg-neutral-800/80 rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start relative transition-all duration-200 ease-in-out hover:bg-gray-200/90 dark:hover:bg-neutral-700/90 hover:scale-[1.035]";
 
-const Experiences = () => {
-  // Track which card is open (hovered)
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  // Used to force remount bullet list for animation reset
-  const [bulletAnimKey, setBulletAnimKey] = useState<number>(0);
+const About = () => {
+  const [xtillionOpen, setXtillionOpen] = useState(false);
+  const [cegsoftOpen, setCegsoftOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [key, setKey] = useState(0); // Key to force re-render of TypingText
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full relative">
-      <div className="absolute top-15 left-0 w-full flex flex-col items-center z-20">
-        <h1 className="text-5xl font-bold">Experience</h1>
-      </div>
-      <div className="flex flex-col items-center justify-center w-full h-full gap-8 mt-25">
-        {cards.map((card, idx) => (
-          <div
-            key={card.key}
-            className={`
-              group
-              bg-primary-foreground dark:bg-zinc-900
-              rounded-2xl shadow-lg
-              p-8 flex flex-col w-full max-w-[61vw]
-              transition-all duration-300
-              cursor-pointer
-              ${openIndex === idx ? "scale-105 shadow-2xl z-10" : "scale-100 opacity-90"}
-              hover:scale-105 hover:shadow-2xl hover:z-10
-              `}
-            onMouseEnter={() => {
-              setOpenIndex(idx);
-              setBulletAnimKey(prev => prev + 1); // force remount for animation reset
-            }}
-            onMouseLeave={() => {
-              setOpenIndex(null);
-              setBulletAnimKey(prev => prev + 1); // force remount for animation reset
-            }}
-            tabIndex={0}
-            onFocus={() => {
-              setOpenIndex(idx);
-              setBulletAnimKey(prev => prev + 1);
-            }}
-            onBlur={() => {
-              setOpenIndex(null);
-              setBulletAnimKey(prev => prev + 1);
-            }}
-            aria-expanded={openIndex === idx}
-            style={{
-              maxHeight: openIndex === idx ? 700 : 180,
-              overflow: "hidden",
-              boxShadow: openIndex === idx
-                ? "0 8px 32px 0 rgba(0,0,0,0.18)"
-                : "0 2px 8px 0 rgba(0,0,0,0.10)",
-            }}
-          >
-            <div className="flex flex-row items-start justify-between w-full mb-2">
-              <div>
-                <div className="flex flex-col">
-                  <div className="flex items-center">
-                    <Image
-                      src={card.logo}
-                      alt={card.logoAlt}
-                      width={card.logoWidth}
-                      height={card.logoHeight}
-                      className="object-contain mr-2"
-                    />
-                  </div>
-                  <h3 className="text-md font-semibold text-foreground mt-2">{card.title}</h3>
-                </div>
-              </div>
-              <div className="flex-shrink-0 ml-4 flex flex-col items-end">
-                <span className="text-sm text-gray-500 dark:text-gray-400 mt-0 whitespace-nowrap">
-                  {card.date}
-                </span>
-              </div>
-            </div>
-            {/* Animate details in/out */}
-            <div
-              className={`
-                transition-all duration-300
-                ${openIndex === idx ? "opacity-100 max-h-[600px] mt-2" : "opacity-0 max-h-0 mt-0 pointer-events-none"}
-                overflow-hidden
-              `}
-              aria-hidden={openIndex !== idx}
-            >
-              <ul className="mt-2 list-disc list-inside text-gray-700 dark:text-gray-200 text-sm">
-                {/* Key on bulletAnimKey and idx to force remount and reset animation */}
-                <BulletList
-                  key={bulletAnimKey + '-' + idx}
-                  points={card.bulletPoints}
-                  animateKey={bulletAnimKey + '-' + idx}
-                  isActive={openIndex === idx}
-                />
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="flex justify-center mb-4">
-        <ArrowDown label="Projects" target="projects" />
-      </div>
-      <style jsx>{`
-        /* For smooth max-height transition */
-        div[aria-expanded] {
-          transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s, transform 0.3s;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setKey(prev => prev + 1); // Increment key to force re-render
+        } else {
+          setIsVisible(false);
         }
-      `}</style>
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: "0px 0px -100px 0px" // Trigger slightly before the section is fully in view
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div ref={sectionRef} className="flex flex-col justify-between h-full px-6 py-12 bg-background text-foreground">
+      {/* Title added to match Projects section */}
+      <div className="flex flex-col items-center justify-center w-full mb-6">
+        <h1 className="text-5xl font-bold mb-2 text-center">
+          About Me
+        </h1>
+        <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
+          {isVisible && (
+            <TypingText
+              key={key} // Force re-render with new key
+              text={[
+                "Education & Work Experience",
+              ]}
+              duration={100}
+              cursor
+              className="inline"
+              cursorClassName="bg-gray-600 dark:bg-gray-300"
+            />
+          )}
+        </h2>
+      </div>
+      
+      {/* Main content */}
+      <div className="flex flex-col items-center justify-center flex-1">
+        <div
+          className="w-full max-w-4xl"
+          style={{
+            minHeight: 400,
+            height: "50vh",
+            maxHeight: 600,
+            overflow: "visible",
+          }}
+        >
+          {/* When experience is open, take full width of the container */}
+          {xtillionOpen || cegsoftOpen ? (
+            <div className="w-full h-full">
+              {xtillionOpen ? (
+                <XtillionExperience onClose={() => setXtillionOpen(false)} />
+              ) : (
+                <CegsoftExperience onClose={() => setCegsoftOpen(false)} />
+              )}
+            </div>
+          ) : (
+            /* Normal two-column layout when no experience is open */
+            <div className="flex flex-col lg:flex-row gap-8 w-full h-full">
+              {/* Main Info Card */}
+              <div
+                className={`flex-1 ${aboutCardBaseClass}`}
+                style={{
+                  minHeight: 0,
+                  maxHeight: "100%",
+                }}
+              >
+                <section className="w-full p-1">
+                  <h1 className="text-xl font-bold mb-1">Intro</h1>
+                  <p className="text-base text-muted-foreground">
+                    Hi I'm <span className="font-semibold">Ignacio!</span>
+                  </p>
+                  <ul className="list-disc list-inside text-md text-muted-foreground mt-0.5">
+                    <li>
+                      Computer Science and Software Engineering
+                    </li>
+                    <li>
+                      Senior at the University of Notre Dame (Go Irish!)
+                    </li>
+                    <li>
+                      San Juan, Puerto Rico → South Bend, Indiana
+                    </li>
+
+                    <li className="italic font-semibold">
+                      Status: Searching for full-time opportunities...
+                    </li>
+                  </ul>
+                </section>
+
+                <section className="w-full">
+                  <h2 className="text-xl font-semibold">Education</h2>
+                  <ul className="space-y-2">
+                    {education.map((edu, idx) => (
+                      <li key={idx} className="border-l-4 border-primary pl-3 mt-3">
+                        <div className="flex justify-between items-center">
+                          <span className="font-bold">{edu.school}</span>
+                          <span className="text-md text-muted-foreground">{edu.years}</span>
+                        </div>
+                        <div className="italic text-md">{edu.degree}</div>
+                        <ul className="list-disc list-inside text-md text-muted-foreground mt-0.5">
+                          {edu.details.map((d, i) => (
+                            <li key={i}>{d}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
+              
+              {/* Experiences Card */}
+              <div
+                className="flex-1"
+                style={{
+                  minHeight: 0,
+                  maxHeight: "100%",
+                  overflow: "visible",
+                  maxWidth: 380,
+                }}
+              >
+                <Experiences 
+                  onXtillionClick={() => setXtillionOpen(true)}
+                  onCegsoftClick={() => setCegsoftOpen(true)}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Arrow pointing to projects - positioned at bottom of page */}
+      <div className="w-full flex justify-center">
+        <ArrowDown label="Projects" />
+      </div>
     </div>
   );
 };
 
-export default Experiences;
+export default About;
