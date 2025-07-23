@@ -6,6 +6,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes pulse-green {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+}
+
+.animate-pulse-blue {
+  animation: pulse 2s ease-out infinite;
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s ease-out infinite;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;

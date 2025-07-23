@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Hero from "./hero/page";
 import About from "./experiences/page";
 import Projects from "./projects/page";
+import Stack from "./stack/page";
 import Mode from "@/components/mode";
 
 export default function Home() {
@@ -48,6 +49,9 @@ export default function Home() {
       </section>
       <section id="projects" className="snap-start w-screen h-screen max-w-screen max-h-screen overflow-x-hidden">
         <Projects />
+      </section>
+      <section id="stack" className="snap-start w-screen h-screen max-w-screen max-h-screen overflow-x-hidden">
+        <Stack />
       </section>
     </div>
   );
