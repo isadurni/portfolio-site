@@ -1,6 +1,7 @@
 import React from "react";
 import Image from 'next/image';
 import cegsoft from '@/public/cegsoft.png';
+import { IconArrowRight } from "@tabler/icons-react";
 
 const cegBullets = [
   "Worked in a cross-functional agile team to build an internal tool for managing Expert Tax user accounts and licenses.",
@@ -8,20 +9,20 @@ const cegBullets = [
   "Deployed a solution that increased the efficiency of 5 members of the support team, on average by 2+ hours daily.",
 ];
 
-const CegsoftExperience = ({ onClose }: { onClose?: () => void }) => {
+const CegsoftExperience = ({ onClose, onPrev }: { onClose?: () => void; onPrev?: () => void }) => {
   const cardBaseClass =
-    "bg-gray-100/50 dark:bg-black/60 rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start h-full relative";
+    "bg-white dark:bg-white rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start h-full relative";
 
   return (
     <div
-      className="flex flex-col items-center justify-center w-full h-full"
-      style={{ minHeight: 400, height: "100%" }}
+      className="flex flex-col items-center justify-center w-full"
+      style={{ minHeight: 400 }}
     >
       <div
         className={cardBaseClass}
         style={{
           width: "100%",
-          height: "100%",
+          minHeight: "fit-content",
         }}
       >
         {/* Close button */}
@@ -36,7 +37,7 @@ const CegsoftExperience = ({ onClose }: { onClose?: () => void }) => {
           </svg>
         </button>
 
-        <div className="flex flex-row items-start justify-between w-full mb-2">
+        <div className="flex flex-row items-start justify-between w-full mb-2 pb-16">
           <div>
             <div className="flex flex-col">
               <div className="flex items-center">
@@ -65,6 +66,19 @@ const CegsoftExperience = ({ onClose }: { onClose?: () => void }) => {
             </div>
           </div>
         </div>
+        
+        {/* Next button - bottom right */}
+        {onPrev && (
+          <button
+            onClick={onPrev}
+            className="absolute bottom-4 right-4 group/button flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100/50 dark:bg-neutral-800/50 hover:bg-gray-200/70 dark:hover:bg-neutral-700/70 transition-all duration-200 hover:scale-105"
+            aria-label="Next to Xtillion"
+          >
+            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">View Xtillion</span>
+            <IconArrowRight className="h-4 w-4 text-gray-600 dark:text-gray-400 transition-transform duration-300 group-hover/button:-rotate-12" />
+          </button>
+        )}
+        
       </div>
     </div>
   );

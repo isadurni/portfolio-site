@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Arrow from "@/components/arrow-down";
 import { TypingText } from "@/animations/typing";
+import { HighlightText } from "@/animations/highlight";
 import Threads from "@/components/threads";
 import LinkedIn from "@/components/linkedin";
 import Github from "@/components/github";
@@ -40,7 +41,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="h-screen w-full flex flex-col">
+    <div ref={sectionRef} className="h-screen w-full flex flex-col relative">
       {/* Top: Name and subtitle */}
       <div className="flex flex-col items-center justify-center mt-25 mb-8">
         <h1 className="text-5xl font-bold mb-2">

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { ProjectShowcase } from "@/components/project-showcase";
 import { TypingText } from "@/animations/typing";
 import { HighlightText } from "@/animations/highlight";
+import ArrowDown from "@/components/arrow-down";
 
 // Realistic project data with YouTube video support
 const projects = [
@@ -22,6 +23,23 @@ const projects = [
       "Team collaboration tools",
       "Progress tracking & analytics",
       "Mobile-responsive design"
+    ]
+  },
+  {
+    name: "Book Explorer",
+    description: "A comprehensive book tracking application that helps users manage their reading journey. Features include book search, reading progress tracking, reviews, and personalized recommendations.",
+    techStack: "React • TypeScript • Node.js • MongoDB • Express • Tailwind CSS",
+    image: "/placeholder.svg", // Fallback image
+    youtubeId: "6nU5VK8QCH0", // Book Tracker App demo
+    demoUrl: "https://book-tracker-demo.example.com",
+    githubUrl: "https://github.com/yourusername/book-tracker",
+    features: [
+      "Book search and discovery",
+      "Reading progress tracking",
+      "Personal book reviews and ratings",
+      "Reading goals and challenges",
+      "Book recommendations",
+      "Responsive web design"
     ]
   },
   {
@@ -80,14 +98,14 @@ const Projects = () => {
       {/* Title added to match Experiences section */}
       <div className="flex flex-col items-center justify-center w-full mt-20">
           <h1 className="text-5xl font-bold mb-2 text-center">
-            Project <HighlightText text="Highlights" />
+            Featured <HighlightText text="Projects" />
           </h1>
         <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
           {isVisible && (
             <TypingText
               key={key} // Force re-render with new key
               text={[
-                "Showcasing Work and Competencies",
+                "Browse Projects and Explore My Work",
               ]}
               duration={100}
               cursor
@@ -99,6 +117,11 @@ const Projects = () => {
       </div>
       <div className="w-full">
         <ProjectShowcase projects={projects} autoplay={false} />
+      </div>
+      
+      {/* Arrow pointing to technical skills */}
+      <div className="w-full flex justify-center mt-8">
+        <ArrowDown label="Technical Skills" />
       </div>
     </div>
   );
