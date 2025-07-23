@@ -6,6 +6,7 @@ import ArrowDown from "@/components/arrow-down";
 import XtillionExperience from "@/components/xtillion";
 import CegsoftExperience from "@/components/ceg";
 import { TypingText } from "@/animations/typing";
+import { HighlightText } from "@/animations/highlight";
 
 const education = [
   {
@@ -25,8 +26,7 @@ const education = [
   },
 ];
 
-const aboutCardBaseClass =
-  "bg-gray-100/50 dark:bg-neutral-800/80 rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start relative transition-all duration-200 ease-in-out hover:bg-gray-200/90 dark:hover:bg-neutral-700/90 hover:scale-[1.035]";
+
 
 const About = () => {
   const [xtillionOpen, setXtillionOpen] = useState(false);
@@ -67,7 +67,7 @@ const About = () => {
       {/* Title added to match Projects section */}
       <div className="flex flex-col items-center justify-center w-full mb-6">
         <h1 className="text-5xl font-bold mb-2 text-center">
-          About Me
+          Professional <HighlightText text="Journey" />
         </h1>
         <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
           {isVisible && (
@@ -96,28 +96,51 @@ const About = () => {
             overflow: "visible",
           }}
         >
-          {/* When experience is open, take full width of the container */}
+          {/* When experience is open, show backdrop and modal */}
           {xtillionOpen || cegsoftOpen ? (
-            <div className="w-full h-full">
-              {xtillionOpen ? (
-                <XtillionExperience onClose={() => setXtillionOpen(false)} />
-              ) : (
-                <CegsoftExperience onClose={() => setCegsoftOpen(false)} />
-              )}
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+              {/* Backdrop - click outside to close */}
+              <div 
+                className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                onClick={() => {
+                  if (xtillionOpen) setXtillionOpen(false);
+                  if (cegsoftOpen) setCegsoftOpen(false);
+                }}
+              />
+              {/* Modal content */}
+              <div className="relative z-10 w-full max-w-4xl h-full max-h-[80vh] p-4 flex items-center justify-center">
+                {xtillionOpen ? (
+                  <XtillionExperience 
+                    onClose={() => setXtillionOpen(false)} 
+                    onNext={() => {
+                      setXtillionOpen(false);
+                      setCegsoftOpen(true);
+                    }}
+                  />
+                ) : (
+                  <CegsoftExperience 
+                    onClose={() => setCegsoftOpen(false)} 
+                    onPrev={() => {
+                      setCegsoftOpen(false);
+                      setXtillionOpen(true);
+                    }}
+                  />
+                )}
+              </div>
             </div>
           ) : (
             /* Normal two-column layout when no experience is open */
             <div className="flex flex-col lg:flex-row gap-8 w-full h-full">
-              {/* Main Info Card */}
+              {/* Main Info - No Card */}
               <div
-                className={`flex-1 ${aboutCardBaseClass}`}
+                className="flex-1 flex flex-col justify-center"
                 style={{
                   minHeight: 0,
                   maxHeight: "100%",
                 }}
               >
-                <section className="w-full p-1">
-                  <h1 className="text-xl font-bold mb-1">Intro</h1>
+                <section className="w-full p-1 mb-6">
+                  <h1 className="text-3xl font-bold mb-1">About Me</h1>
                   <p className="text-base text-muted-foreground">
                     Hi I'm <span className="font-semibold">Ignacio!</span>
                   </p>
@@ -132,9 +155,6 @@ const About = () => {
                       San Juan, Puerto Rico → South Bend, Indiana
                     </li>
 
-                    <li className="italic font-semibold">
-                      Status: Searching for full-time opportunities...
-                    </li>
                   </ul>
                 </section>
 
@@ -142,17 +162,19 @@ const About = () => {
                   <h2 className="text-xl font-semibold">Education</h2>
                   <ul className="space-y-2">
                     {education.map((edu, idx) => (
-                      <li key={idx} className="border-l-4 border-primary pl-3 mt-3">
-                        <div className="flex justify-between items-center">
-                          <span className="font-bold">{edu.school}</span>
-                          <span className="text-md text-muted-foreground">{edu.years}</span>
+                      <li key={idx} className="flex items-center mt-3">
+                        <div className="flex-shrink-0 w-20 text-sm text-muted-foreground text-center">
+                          {edu.years}
                         </div>
-                        <div className="italic text-md">{edu.degree}</div>
-                        <ul className="list-disc list-inside text-md text-muted-foreground mt-0.5">
-                          {edu.details.map((d, i) => (
-                            <li key={i}>{d}</li>
-                          ))}
-                        </ul>
+                        <div className="flex-1 border-l-4 border-primary pl-3">
+                          <div className="font-bold">{edu.school}</div>
+                          <div className="italic text-md">{edu.degree}</div>
+                          <ul className="list-disc list-inside text-md text-muted-foreground mt-0.5">
+                            {edu.details.map((d, i) => (
+                              <li key={i}>{d}</li>
+                            ))}
+                          </ul>
+                        </div>
                       </li>
                     ))}
                   </ul>

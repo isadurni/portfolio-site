@@ -2,6 +2,7 @@ import React from "react";
 import Image from 'next/image';
 import xtillion from '@/public/xtillion.png';
 import cegsoft from '@/public/cegsoft.png';
+import { PulsatingButton } from './pulsating-button';
 
 // Accepts callbacks to notify parent when cards are clicked
 const Experiences = ({ 
@@ -14,7 +15,7 @@ const Experiences = ({
   const CARD_HEIGHT = 200;
   // Updated cardBaseClass for hover effect: slightly grey bg and scale up
   const cardBaseClass =
-    "bg-gray-100/50 dark:bg-neutral-800/80 rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start relative transition-all duration-200 ease-in-out hover:bg-gray-200/90 dark:hover:bg-neutral-700/90 hover:scale-[1.035]";
+    "bg-gray-100/50 dark:bg-neutral-800/80 rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start relative transition-all duration-200 ease-in-out hover:bg-gray-200/90 dark:hover:bg-neutral-700/90 hover:scale-[1.035] cursor-pointer";
 
   return (
     <div
@@ -36,6 +37,7 @@ const Experiences = ({
           height: CARD_HEIGHT,
           width: "100%",
         }}
+        onClick={onXtillionClick}
       >
         {/* Date in top right */}
         <span className="absolute top-4 right-4 text-sm text-muted-foreground whitespace-nowrap">
@@ -64,12 +66,16 @@ const Experiences = ({
         </div>
         
         {/* View button */}
-        <button
-          onClick={onXtillionClick}
-          className="absolute bottom-4 right-4 px-3 py-1 bg-primary text-primary-foreground rounded-md text-sm hover:bg-primary/90 transition-colors"
-        >
-          View
-        </button>
+        <div className="absolute bottom-4 right-4">
+          <PulsatingButton
+            onClick={onXtillionClick}
+            className="text-sm"
+            variant="green"
+            duration="2s"
+          >
+            View
+          </PulsatingButton>
+        </div>
       </div>
 
       {/* Spacer to push cards apart */}
@@ -85,6 +91,7 @@ const Experiences = ({
           height: CARD_HEIGHT,
           width: "100%",
         }}
+        onClick={onCegsoftClick}
       >
         {/* Date in top right */}
         <span className="absolute top-4 right-4 text-sm text-muted-foreground whitespace-nowrap">
@@ -113,12 +120,16 @@ const Experiences = ({
         </div>
         
         {/* View button */}
-        <button
-          onClick={onCegsoftClick}
-          className="absolute bottom-4 right-4 px-3 py-1 bg-primary text-primary-foreground rounded-md text-sm hover:bg-primary/90 transition-colors"
-        >
-          View
-        </button>
+        <div className="absolute bottom-4 right-4">
+          <PulsatingButton
+            onClick={onCegsoftClick}
+            className="text-sm"
+            variant="green"
+            duration="2s"
+          >
+            View
+          </PulsatingButton>
+        </div>
       </div>
     </div>
   );
