@@ -8,7 +8,7 @@ interface ArrowProps {
 const Arrow: React.FC<ArrowProps> = ({ label, target = "experiences" }) => {
   return (
     <div className="flex flex-col items-center mt-4">
-      <span className="text-md text-gray-500 mb-1">{label}</span>
+              <span className="text-sm md:text-md text-gray-500 mb-1">{label}</span>
       <div className="cursor-default">
         <svg
           width="24"

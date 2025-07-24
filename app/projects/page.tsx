@@ -94,24 +94,27 @@ const Projects = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="flex flex-col items-center justify-center w-full h-screen relative">
+    <div ref={sectionRef} className="flex flex-col items-center justify-center w-full min-h-screen md:h-screen relative">
       {/* Title added to match Experiences section */}
       <div className="flex flex-col items-center justify-center w-full mt-20">
-          <h1 className="text-5xl font-bold mb-2 text-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-center">
             Featured <HighlightText text="Projects" />
           </h1>
-        <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
+          <span className="md:hidden">Browse Projects and Explore My Work</span>
           {isVisible && (
-            <TypingText
-              key={key} // Force re-render with new key
-              text={[
-                "Browse Projects and Explore My Work",
-              ]}
-              duration={100}
-              cursor
-              className="inline"
-              cursorClassName="bg-gray-600 dark:bg-gray-300"
-            />
+            <div className="hidden md:inline">
+              <TypingText
+                key={key} // Force re-render with new key
+                text={[
+                  "Browse Projects and Explore My Work",
+                ]}
+                duration={100}
+                cursor
+                className="inline"
+                cursorClassName="bg-gray-600 dark:bg-gray-300"
+              />
+            </div>
           )}
         </h2>
       </div>
@@ -120,7 +123,7 @@ const Projects = () => {
       </div>
       
       {/* Arrow pointing to technical skills */}
-      <div className="w-full flex justify-center mt-8">
+      <div className="w-full flex justify-center mt-8 hidden md:flex">
         <ArrowDown label="Technical Skills" />
       </div>
     </div>

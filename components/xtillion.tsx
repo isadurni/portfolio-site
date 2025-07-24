@@ -14,7 +14,7 @@ const xtillionBullets = [
 
 const XtillionExperience = ({ onClose, onNext }: { onClose?: () => void; onNext?: () => void }) => {
   const cardBaseClass =
-    "bg-white dark:bg-white rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start h-full relative";
+    "bg-card dark:bg-card rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start h-full relative";
 
   return (
     <div
@@ -31,7 +31,7 @@ const XtillionExperience = ({ onClose, onNext }: { onClose?: () => void; onNext?
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-muted hover:bg-muted/80 rounded-full transition-colors"
           aria-label="Close"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -52,28 +52,28 @@ const XtillionExperience = ({ onClose, onNext }: { onClose?: () => void; onNext?
                   className="object-contain mr-2"
                 />
               </div>
-              <h3 className="text-md font-semibold text-foreground mt-2">
+              <h3 className="text-sm md:text-md font-semibold text-foreground mt-2">
                 Software Engineering Intern
               </h3>
-              <span className="text-sm text-muted-foreground mt-0 whitespace-nowrap">
+              <span className="text-xs md:text-sm text-muted-foreground mt-0 whitespace-nowrap">
                 June 2025 - August 2025
               </span>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs md:text-sm text-muted-foreground">
                 San Juan, PR
               </p>
               {/* Bullets moved up after location */}
               <div className="space-y-4 mt-5">
                 <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-2">Internal Project:</h4>
-                  <ul className="list-disc list-inside text-sm text-muted-foreground pl-2 space-y-1">
+                  <h4 className="text-xs md:text-sm font-semibold text-foreground mb-2">Internal Project:</h4>
+                  <ul className="list-disc list-inside text-xs md:text-sm text-muted-foreground pl-2 space-y-1">
                     {xtillionBullets.slice(0, 3).map((point, idx) => (
                       <li key={idx}>{point}</li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-2">Client Project:</h4>
-                  <ul className="list-disc list-inside text-sm text-muted-foreground pl-2 space-y-1">
+                  <h4 className="text-xs md:text-sm font-semibold text-foreground mb-2">Client Project:</h4>
+                  <ul className="list-disc list-inside text-xs md:text-sm text-muted-foreground pl-2 space-y-1">
                     {xtillionBullets.slice(3).map((point, idx) => (
                       <li key={idx}>{point}</li>
                     ))}
@@ -88,11 +88,11 @@ const XtillionExperience = ({ onClose, onNext }: { onClose?: () => void; onNext?
         {onNext && (
           <button
             onClick={onNext}
-            className="absolute bottom-4 right-4 group/button flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100/50 dark:bg-neutral-800/50 hover:bg-gray-200/70 dark:hover:bg-neutral-700/70 transition-all duration-200 hover:scale-105"
+            className="absolute bottom-4 right-4 group/button flex items-center gap-2 px-3 py-1 rounded-full bg-muted/50 hover:bg-muted/70 transition-all duration-200 hover:scale-105"
             aria-label="Next to Cegsoft"
           >
-            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">View CEGsoft</span>
-            <IconArrowRight className="h-4 w-4 text-gray-600 dark:text-gray-400 transition-transform duration-300 group-hover/button:-rotate-12" />
+            <span className="text-xs md:text-sm text-muted-foreground font-medium">View CEGsoft</span>
+            <IconArrowRight className="h-4 w-4 text-muted-foreground transition-transform duration-300 group-hover/button:-rotate-12" />
           </button>
         )}
         
