@@ -41,13 +41,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="h-screen w-full flex flex-col relative">
+    <div ref={sectionRef} className="min-h-screen md:h-screen w-full flex flex-col relative">
       {/* Top: Name and subtitle */}
       <div className="flex flex-col items-center justify-center mt-25 mb-8">
-        <h1 className="text-5xl font-bold mb-2">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
           Ignacio Sadurní
         </h1>
-        <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-medium">
           {isVisible && (
             <TypingText
               key={key} // Force re-render with new key
@@ -82,18 +82,20 @@ const Hero = () => {
           <div className="h-25 w-px bg-gray-300 dark:bg-gray-600 mx-2" />
           {/* Info Rows */}
           <div className="flex flex-col">
-            <h3 className="text-xl font-bold text-gray-500 dark:text-gray-400 mb-1 mt-8">
+            <h3 className="text-lg md:text-xl font-bold text-gray-500 dark:text-gray-400 mb-1 mt-8">
               San Juan, Puerto Rico
             </h3>
-            <h3 className="text-l text-gray-500 dark:text-gray-400 mb-1">
+            <h3 className="text-base md:text-l text-gray-500 dark:text-gray-400 mb-1">
               <a href="mailto:ignaciosadurni@gmail.com" className="hover:text-blue-400 transition-colors">ignaciosadurni@gmail.com</a>
             </h3>
-            <h3 className="text-l text-gray-500 dark:text-gray-400 mb-10">
+            <h3 className="text-base md:text-l text-gray-500 dark:text-gray-400 mb-10">
               +1 (787) 243-4859
             </h3>
           </div>
         </div>
-        <Arrow label="Bio" />
+        <div className="hidden md:block">
+          <Arrow label="Bio" />
+        </div>
       </div>
     </div>
   );

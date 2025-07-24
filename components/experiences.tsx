@@ -12,7 +12,7 @@ const Experiences = ({
   onXtillionClick?: () => void;
   onCegsoftClick?: () => void;
 }) => {
-  const CARD_HEIGHT = 200;
+  const CARD_HEIGHT = 190;
   // Updated cardBaseClass for hover effect: slightly grey bg and scale up
   const cardBaseClass =
     "bg-gray-100/50 dark:bg-neutral-800/80 rounded-xl shadow-lg p-6 space-y-4 overflow-auto min-w-0 flex flex-col justify-between items-start relative transition-all duration-200 ease-in-out hover:bg-gray-200/90 dark:hover:bg-neutral-700/90 hover:scale-[1.035] cursor-pointer";
@@ -40,7 +40,7 @@ const Experiences = ({
         onClick={onXtillionClick}
       >
         {/* Date in top right */}
-        <span className="absolute top-4 right-4 text-sm text-muted-foreground whitespace-nowrap">
+        <span className="absolute top-4 right-4 text-xs md:text-sm text-muted-foreground whitespace-nowrap">
           Summer 2025
         </span>
         <div className="flex flex-row items-center justify-between w-full mb-2 h-full">
@@ -55,10 +55,10 @@ const Experiences = ({
                   className="object-contain mr-2"
                 />
               </div>
-              <h3 className="text-md font-semibold text-foreground mt-2">
+              <h3 className="text-sm md:text-md font-semibold text-foreground mt-2">
                 Software Engineer
               </h3>
-              <h3 className="text-sm text-muted-foreground italic">
+              <h3 className="text-xs md:text-sm text-muted-foreground italic">
                 Internship
               </h3>
             </div>
@@ -79,7 +79,7 @@ const Experiences = ({
       </div>
 
       {/* Spacer to push cards apart */}
-      <div className="flex-1" />
+      <div className="flex-1 min-h-8" />
 
       {/* Bottom Card (Cegsoft) */}
       <div
@@ -94,7 +94,7 @@ const Experiences = ({
         onClick={onCegsoftClick}
       >
         {/* Date in top right */}
-        <span className="absolute top-4 right-4 text-sm text-muted-foreground whitespace-nowrap">
+        <span className="absolute top-4 right-4 text-xs md:text-sm text-muted-foreground whitespace-nowrap">
           Summer 2024
         </span>
         <div className="flex flex-row items-center justify-between w-full mb-2 h-full">
@@ -109,10 +109,10 @@ const Experiences = ({
                   className="object-contain mr-2"
                 />
               </div>
-              <h3 className="text-md font-semibold text-foreground mt-2">
+              <h3 className="text-sm md:text-md font-semibold text-foreground mt-2">
                 Software Developer
               </h3>
-              <h3 className="text-sm text-muted-foreground italic">
+              <h3 className="text-xs md:text-sm text-muted-foreground italic">
                 Internship
               </h3>
             </div>

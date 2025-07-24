@@ -21,47 +21,66 @@ const layers = [
   {
     label: "Frontend",
     icons: [
-      { Icon: FaHtml5, color: "#E34F26" },
-      { Icon: FaCss3Alt, color: "#1572B6" },
-      { Icon: SiTypescript, color: "#3178C6" },
-      { Icon: FaJs, color: "#F7DF1E" },
-      { Icon: FaReact, color: "#61DAFB" }
+      { Icon: FaHtml5, color: "#E34F26", name: "HTML5" },
+      { Icon: FaCss3Alt, color: "#1572B6", name: "CSS3" },
+      { Icon: SiTypescript, color: "#3178C6", name: "TypeScript" },
+      { Icon: FaJs, color: "#F7DF1E", name: "JavaScript" },
+      { Icon: FaReact, color: "#61DAFB", name: "React" }
     ]
   },
   {
     label: "Backend",
     icons: [
-      { Icon: FaPython, color: "#3776AB" },
-      { Icon: FaNodeJs, color: "#339933" },
-      { Icon: SiFastapi, color: "#009688" },
-      { Icon: SiDotnet, color: "#512BD4" }
+      { Icon: FaPython, color: "#3776AB", name: "Python" },
+      { Icon: FaNodeJs, color: "#339933", name: "Node.js" },
+      { Icon: SiFastapi, color: "#009688", name: "FastAPI" },
+      { Icon: SiDotnet, color: "#512BD4", name: ".NET" }
     ]
   },
   {
     label: "Database",
     icons: [
-      { Icon: SiMongodb, color: "#47A248" },
-      { Icon: SiPostgresql, color: "#336791" }
+      { Icon: SiMongodb, color: "#47A248", name: "MongoDB" },
+      { Icon: SiPostgresql, color: "#336791", name: "PostgreSQL" }
     ]
   },
   {
     label: "Cloud",
     icons: [
-      { Icon: FaAws, color: "#FF9900" },
-      { Icon: FaCloud, color: "#0078D4" }
+      { Icon: FaAws, color: "#FF9900", name: "AWS" },
+      { Icon: FaCloud, color: "#0078D4", name: "Azure" }
     ]
   },
   {
     label: "Extras",
     icons: [
-      { Icon: FaGithub, color: "#181717" },
-      { Icon: FaDocker, color: "#2496ED" }
+      { Icon: FaGithub, color: "#181717", darkColor: "#ffffff", name: "GitHub" },
+      { Icon: FaDocker, color: "#2496ED", name: "Docker" }
     ]
   }
 ];
 
 const TechStack = () => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Check for dark mode
+  React.useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+    
+    checkDarkMode();
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <StyledWrapper>
@@ -74,17 +93,20 @@ const TechStack = () => {
             onMouseLeave={() => setHovered(null)}
           >
             <div className="layer-content">
-              <span>{layer.label}</span>
+              <span className="layer-title">{layer.label}</span>
               {hovered === idx && (
                 <div className="skills">
                   <div className="icons-grid">
                     {layer.icons.map((iconData, iconIdx) => (
                       <div key={iconIdx} className="icon-wrapper">
-                        <iconData.Icon 
-                          size={32} 
-                          color={iconData.color}
-                          className="tech-icon"
-                        />
+                        <div className="icon-container">
+                          <iconData.Icon 
+                            size={24} 
+                            color={isDarkMode && iconData.darkColor ? iconData.darkColor : iconData.color}
+                            className={`tech-icon ${iconData.Icon === SiTypescript ? 'typescript-icon' : ''}`}
+                          />
+                          <span className="skill-name">{iconData.name}</span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -100,17 +122,29 @@ const TechStack = () => {
 
 const StyledWrapper = styled.div`
   .stack {
-    width: 600px;
-    height: 70vh;
-    min-height: 500px;
-    max-height: 800px;
+    width: 90vw;
+    max-width: 500px;
+    height: 50vh;
+    min-height: 350px;
+    max-height: 500px;
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--card);
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 1.5em;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    gap: 6px;
+    padding: 0.8em;
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (min-width: 768px) {
+    .stack {
+      width: 500px;
+      height: 55vh;
+      min-height: 400px;
+      max-height: 600px;
+      gap: 8px;
+      padding: 1em;
+    }
   }
 
   .layer {
@@ -118,10 +152,10 @@ const StyledWrapper = styled.div`
     flex: 1;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all .5s ease;
-    background: #ffffff;
-    border: 2px solid #e5e7eb;
+    background: var(--card);
+    border: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -136,37 +170,50 @@ const StyledWrapper = styled.div`
     align-items: center;
     height: 100%;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 8px;
   }
 
   .layer:hover {
     flex: 3;
     transform: scale(1.02);
-    box-shadow: 0 15px 40px rgba(107, 114, 128, 0.15);
-    border-color: #9ca3af;
+    box-shadow: var(--shadow-xl);
+    border-color: var(--muted-foreground);
   }
 
   .layer span {
-    font-size: 1.3em;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #6b7280;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    color: var(--muted-foreground);
     letter-spacing: .1em;
     transition: all .5s ease;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
+  }
+
+  .layer-title {
+    text-transform: uppercase;
   }
 
   .layer:hover span {
-    font-size: 1.6em;
-    margin-bottom: 1em;
-    color: #374151;
+    margin-bottom: 0.8em;
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    .layer span {
+      font-weight: 600;
+    }
+
+    .layer:hover span {
+      font-weight: 600;
+    }
   }
 
   .skills {
     opacity: 1;
     transform: translateY(0);
     transition: all .5s ease;
-    color: #6b7280;
+    color: var(--muted-foreground);
     font-size: 1em;
     text-align: center;
     line-height: 1.5;
@@ -179,61 +226,79 @@ const StyledWrapper = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
   }
 
   .icon-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+  }
+
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+  }
+
+  .skill-name {
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--muted-foreground);
+    text-align: center;
+    display: block;
+    font-family: var(--font-sans);
+    text-transform: none;
+  }
+
+  @media (min-width: 768px) {
+    .icon-wrapper {
+      /* Removed padding to eliminate card effect */
+    }
+
+    .skill-name {
+      display: block;
+    }
+
+    .icons-grid {
+      gap: 1.5rem;
+    }
   }
 
   .icon-wrapper:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .tech-icon {
     transition: all 0.3s ease;
+    width: 36px;
+    height: 36px;
   }
 
   .icon-wrapper:hover .tech-icon {
     transform: scale(1.1);
   }
 
-  /* Dark mode support */
-  @media (prefers-color-scheme: dark) {
-    .stack {
-      background: #f9fafb;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  @media (min-width: 768px) {
+    .tech-icon {
+      width: 48px;
+      height: 48px;
     }
-    
-    .layer {
-      background: #f9fafb;
-      border-color: #e5e7eb;
-    }
+  }
 
-    .layer:hover {
-      border-color: #9ca3af;
-      box-shadow: 0 15px 40px rgba(107, 114, 128, 0.15);
-    }
+  .typescript-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
 
-    .layer span {
-      color: #6b7280;
-    }
-
-    .layer:hover span {
-      color: #374151;
-    }
-
-    .skills {
-      color: #6b7280;
+  @media (min-width: 768px) {
+    .typescript-icon {
+      width: 42px !important;
+      height: 42px !important;
     }
   }
 `;

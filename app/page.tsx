@@ -36,21 +36,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-screen h-screen max-w-screen max-h-screen overflow-y-scroll overflow-x-hidden snap-y snap-mandatory relative">
+    <div className="w-screen min-h-screen max-w-screen overflow-y-scroll overflow-x-hidden md:h-screen md:max-h-screen md:snap-y md:snap-mandatory relative">
       <div className="fixed top-6 right-10 z-50 pointer-events-auto">
         {/* Mode toggle for dark/light mode */}
         <Mode />
       </div>
-      <section id="hero" className="snap-start w-screen h-screen max-w-screen max-h-screen overflow-x-hidden">
+      <section id="hero" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
         <Hero />
       </section>
-      <section id="experiences" className="snap-start w-screen h-screen max-w-screen max-h-screen overflow-x-hidden">
+      <section id="experiences" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
         <About />
       </section>
-      <section id="projects" className="snap-start w-screen h-screen max-w-screen max-h-screen overflow-x-hidden">
+      <section id="projects" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
         <Projects />
       </section>
-      <section id="stack" className="snap-start w-screen h-screen max-w-screen max-h-screen overflow-x-hidden">
+      <section id="stack" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
         <Stack />
       </section>
     </div>
