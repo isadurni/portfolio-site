@@ -38,22 +38,25 @@ const Stack = () => {
   }, []);
 
   return (
-    <div ref={sectionRef} className="flex flex-col items-center justify-center w-full h-screen relative">
+    <div ref={sectionRef} className="flex flex-col items-center justify-center w-full min-h-screen md:h-screen relative">
       {/* Title */}
       <div className="flex flex-col items-center justify-center w-full">
-        <h1 className="text-5xl font-bold mb-2 text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-center">
           Technical <HighlightText text="Skills" />
         </h1>
-        <h2 className="text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
+        <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 font-medium text-center">
+          <span className="md:hidden">Favorite Tools and Technologies</span>
           {isVisible && (
-            <TypingText
-              key={key}
-              text={"Favorite Tools and Technologies"}
-              duration={100}
-              cursor
-              className="inline"
-              cursorClassName="bg-gray-600 dark:bg-gray-300"
-            />
+            <div className="hidden md:inline">
+              <TypingText
+                key={key}
+                text={"Favorite Tools and Technologies"}
+                duration={100}
+                cursor
+                className="inline"
+                cursorClassName="bg-gray-600 dark:bg-gray-300"
+              />
+            </div>
           )}
         </h2>
       </div>
