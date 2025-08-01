@@ -75,8 +75,8 @@ const Hero = () => {
       <div className="flex flex-col items-center mb-5 mt-auto">
         <div className="flex flex-row items-center gap-6">
           <div className="flex flex-col items-center gap-2">
-            <LinkedIn />
             <Github />
+            <LinkedIn />
           </div>
           {/* Vertical Divider */}
           <div className="h-25 w-px bg-gray-300 dark:bg-gray-600 mx-2" />

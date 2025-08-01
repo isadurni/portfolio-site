@@ -137,7 +137,7 @@ const About = () => {
               {/* About Me & Education Section */}
               <div className="w-full lg:flex-1 lg:flex lg:flex-col lg:justify-center">
                 <section className="w-full p-1 mb-6">
-                  <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1">About Me</h1>
+                  <h1 className="text-base md:text-lg lg:text-2xl font-semibold">About Me</h1>
                   <p className="text-sm lg:text-base text-muted-foreground">
                     Hi I'm <span className="font-semibold">Ignacio!</span>
                   </p>
@@ -155,7 +155,7 @@ const About = () => {
                 </section>
 
                 <section className="w-full">
-                  <h2 className="text-base md:text-lg lg:text-xl font-semibold">Education</h2>
+                  <h2 className="text-base md:text-lg lg:text-2xl font-semibold">Education</h2>
                   <ul className="space-y-2">
                     {education.map((edu, idx) => (
                       <li key={idx} className="flex items-start lg:items-center mt-3">

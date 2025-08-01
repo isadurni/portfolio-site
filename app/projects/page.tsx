@@ -10,8 +10,8 @@ import ArrowDown from "@/components/arrow-down";
 const projects = [
   {
     name: "AI Chatbot Agent",
-    description: "An intelligent AI-powered task management system that uses machine learning to prioritize and categorize tasks. Features natural language processing for task creation and intelligent scheduling algorithms.",
-    techStack: "Python • TensorFlow • React • FastAPI • PostgreSQL • LangChain",
+    description: "Task Bot is an intelligent AI assistant that helps you manage your calendar and schedule tasks through natural language conversations. It integrates with Google Calendar and provides a modern, user-friendly interface for seamless task management.",
+    techStack: "TypeScript • React • Vite • Python • FastAPI • LangChain • Google OAuth 2.0 • OpenAI API",
     image: "/xtillion.png", // Fallback image
     youtubeId: "aWEhcZcObjc", // AI Task Planner Assistant demo
     demoUrl: "https://demo.example.com",
@@ -29,7 +29,7 @@ const projects = [
     name: "Book Explorer",
     description: "A comprehensive book tracking application that helps users manage their reading journey. Features include book search, reading progress tracking, reviews, and personalized recommendations.",
     techStack: "React • TypeScript • Node.js • MongoDB • Express • Tailwind CSS",
-    image: "/placeholder.svg", // Fallback image
+    image: "/ceg.png", // Fallback image
     youtubeId: "6nU5VK8QCH0", // Book Tracker App demo
     demoUrl: "https://book-tracker-demo.example.com",
     githubUrl: "https://github.com/yourusername/book-tracker",
@@ -46,7 +46,7 @@ const projects = [
     name: "Photo Booth App",
     description: "A modern photo booth application with real-time filters, effects, and sharing capabilities. Features user authentication, photo editing tools, and social media integration.",
     techStack: "React Native • Node.js • AWS S3 • Firebase • Image Processing",
-    image: "/ceg.png", // Fallback image
+    image: "/placeholder.svg", // Fallback image
     youtubeId: "YvdplIZsOZU", // Photo Booth Pro App demo
     demoUrl: "https://photobooth-demo.example.com",
     githubUrl: "https://github.com/yourusername/photo-booth-pro",

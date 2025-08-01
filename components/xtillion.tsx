@@ -5,7 +5,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 
 const xtillionBullets = [
   "Built an end-to-end agentic AI evaluation framework to benchmark LLM performance across specific business use cases.",
-  "Engineered a FastAPI backend in Python with RESTful endpoints, Pydantic validations, and SQLAlchemy CRUD operations.",
+  "Engineered a FastAPI backend in Python with RESTful endpoints, Pydantic validations, and SQLAlchemy CRUD operations on a PostgreSQL DB.",
   "Developed a Next.js frontend using React and Typescript. Deployed the Dockerized UI and API to AWS for production use.",
   "Conducted research for a B2B client serving Fortune 500 companies, analyzing system architecture and integration needs.",
   "Built a Python ETL tool that converts ~10,000 lines of CSV and JSON parameters into a compliant text format for submission.",
