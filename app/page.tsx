@@ -5,6 +5,7 @@ import About from "./experiences/page";
 import Projects from "./projects/page";
 import Stack from "./stack/page";
 import Mode from "@/components/mode";
+import TestPage from "./test/page";
 
 export default function Home() {
   useEffect(() => {
@@ -17,6 +18,9 @@ export default function Home() {
       }
     };
 
+    // Add smooth scrolling
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
     // On load, set theme from localStorage or system preference
     try {
       const theme = localStorage.getItem("theme");
@@ -36,23 +40,26 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-screen min-h-screen max-w-screen overflow-y-scroll overflow-x-hidden md:h-screen md:max-h-screen md:snap-y md:snap-mandatory relative">
-      <div className="fixed top-6 right-10 z-50 pointer-events-auto">
-        {/* Mode toggle for dark/light mode */}
+    <div className="min-h-screen w-full overflow-x-hidden relative">
+      {/* Dark/Light Mode Toggle */}
+      <div className="fixed top-6 right-6 z-50">
         <Mode />
       </div>
-      <section id="hero" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
+      <div className="w-full">
+        <TestPage />
+      </div>
+      <section id="hero" className="w-full">
         <Hero />
       </section>
-      <section id="experiences" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
+      <section id="experiences" className="w-full">
         <About />
       </section>
-      <section id="projects" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
+      <section id="projects" className="w-full">
         <Projects />
       </section>
-      <section id="stack" className="md:snap-start w-screen min-h-screen md:h-screen max-w-screen md:max-h-screen overflow-x-hidden">
+      {/* <section id="stack" className="w-full">
         <Stack />
-      </section>
+      </section> */}
     </div>
   );
 }
