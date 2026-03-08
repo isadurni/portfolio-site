@@ -1,42 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+"use client";
 
-const getInitialChecked = () => {
-  if (typeof window === "undefined") return false;
-  // Check localStorage first
-  const theme = localStorage.getItem("theme");
-  if (theme === "dark") return true;
-  if (theme === "light") return false;
-  // Fallback to system preference
-  return window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-};
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
-const setTheme = (theme: string) => {
+function applyThemeToDocument(theme: "dark" | "light") {
   if (theme === "dark") {
     document.documentElement.classList.add("dark");
   } else {
     document.documentElement.classList.remove("dark");
   }
-  localStorage.setItem("theme", theme);
-};
+}
 
 const Checkbox = () => {
   const [checked, setChecked] = useState<boolean | null>(null);
 
+  // Storage read only in useEffect (client-only); never at module top or in useState initializer
   useEffect(() => {
-    // Only run on client
-    setChecked(getInitialChecked());
+    let value: boolean;
+    try {
+      if (typeof window === "undefined") {
+        value = false;
+      } else {
+        const stored =
+          typeof window.localStorage?.getItem === "function"
+            ? window.localStorage.getItem("theme")
+            : null;
+        if (stored === "dark") value = true;
+        else if (stored === "light") value = false;
+        else
+          value = !!window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+      }
+    } catch {
+      value =
+        typeof window !== "undefined" &&
+        !!window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+    }
+    setChecked(value);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setChecked(isChecked);
-
-    if (isChecked) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
+    const theme = isChecked ? "dark" : "light";
+    applyThemeToDocument(theme);
+    // Storage write only in event handler
+    try {
+      if (typeof window !== "undefined" && typeof window.localStorage?.setItem === "function") {
+        window.localStorage.setItem("theme", theme);
+      }
+    } catch {
+      // ignore
     }
   };
 

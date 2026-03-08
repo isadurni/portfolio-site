@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import Hero from "./hero/page";
 import About from "./experiences/page";
@@ -7,31 +8,25 @@ import Stack from "./stack/page";
 import Mode from "@/components/mode";
 
 export default function Home() {
+  // Theme: only read storage inside useEffect (client-only); use window.localStorage
   useEffect(() => {
-    // Theme initialization
-    const setTheme = (theme: string) => {
-      if (theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    };
-
-    // On load, set theme from localStorage or system preference
+    let theme: "dark" | "light" = "light";
     try {
-      const theme = localStorage.getItem("theme");
-      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        setTheme("dark");
-      } else {
-        setTheme("light");
+      if (typeof window !== "undefined") {
+        const value =
+          typeof window.localStorage?.getItem === "function"
+            ? window.localStorage.getItem("theme")
+            : null;
+        const preferDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+        if (value === "dark" || (!value && preferDark)) theme = "dark";
       }
-    } catch (e) {
-      // Fallback to system preference if localStorage is not available
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setTheme("dark");
-      } else {
-        setTheme("light");
-      }
+    } catch {
+      theme = "light";
+    }
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
